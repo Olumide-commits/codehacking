@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::resource('/Admin/user', 'App\Http\Controllers\AdminUsersController');
+
+
+
+Route::get('/admin', function(){
+
+    return view('admin.index');
+});
+
+
+
+Route::get('/masterpage', 'App\Http\Controllers\AdminUsersController@master');
