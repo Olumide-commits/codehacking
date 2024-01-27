@@ -24,7 +24,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('/Admin/user', 'App\Http\Controllers\AdminUsersController');
+Route::resource('/admin/user', 'App\Http\Controllers\AdminUsersController');
 
 
 
@@ -35,4 +35,7 @@ Route::get('/admin', function(){
 
 
 
-Route::get('/masterpage', 'App\Http\Controllers\AdminUsersController@master');
+
+
+
+
