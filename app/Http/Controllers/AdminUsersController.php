@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserEditRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Photo;
@@ -45,7 +46,7 @@ class AdminUsersController extends Controller
 
            $name = time() . $file->getClientOriginalName();
 
-           $file->move('images', '$name');
+           $file->move('images', $name);
 
            $photo = Photo::create(['file'=>$name]);
 
@@ -83,14 +84,39 @@ class AdminUsersController extends Controller
     public function edit(string $id)
     {
         //
+        $user = User::findOrFail($id);
+
+        $roles = Role::pluck('name','id')->all();
+
+        return view('admin.users.edit', compact('user','roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserEditRequest $request, string $id)
     {
         //
+        $user= User::findOrFail($id);
+
+
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+           $name = time() . $file->getClientOriginalName();
+
+           $file->move('images', $name);
+
+           $photo = Photo::create(['file'=>$name]);
+
+           $input['photo_id']= $photo->id;
+        }
+
+        $user->update($input);
+
+        return redirect('/admin/user');
+
     }
 
     /**
