@@ -24,7 +24,7 @@
     {!! Form::select('is_active', array(1=>'Active', 0=> 'Not Active'), 0, ['class'=>'form-control']) !!}
     <br>
     {!! Form::label('photo_id','Image:') !!}
-    {!! Form::file('photo_id', ['class'=>'form-control']) !!}
+    {!! Form::file('photo_id',null, ['class'=>'form-control']) !!}
     <br>
 
     {!! Form::label('password','Password:') !!}

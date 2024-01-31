@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware'=> 'admin'], function () {
 
 Route::resource('/admin/user', 'App\Http\Controllers\AdminUsersController');
+Route::resource('/admin/posts', 'App\Http\Controllers\AdminPostsController');
 
 });
 

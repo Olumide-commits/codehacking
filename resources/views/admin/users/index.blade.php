@@ -6,6 +6,12 @@
 
 <h1>Users</h1>
 
+ @if (Session::has('deleted_user'))
+
+  <p> {{Session('deleted_user')}}</p>
+
+ @endif
+
 <table class="table">
     <thead>
       <tr>
@@ -36,7 +42,7 @@
                 <td> <a href="{{route('user.edit', $user->id)}}"> {{ $user->name }} </a></td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->created_at-> diffForHumans()}}</td>
-                <td>{{ $user->updated_at}}</td>
+                <td>{{ $user->updated_at->diffForHumans()}}</td>
               </tr>
 
 

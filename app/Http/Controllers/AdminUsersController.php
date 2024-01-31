@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserEditRequest;
+
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UserEditRequest;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -54,6 +56,7 @@ class AdminUsersController extends Controller
         }
 
 
+
         $user = User::create($input);
 
 
@@ -97,7 +100,7 @@ class AdminUsersController extends Controller
     public function update(UserEditRequest $request, string $id)
     {
         //
-        $user= User::findOrFail($id);
+        $user = User::findOrFail($id);
 
 
         $input = $request->all();
@@ -125,7 +128,21 @@ class AdminUsersController extends Controller
     public function destroy(string $id)
     {
         //
+
+        $user = User::findOrFail($id);
+
+        //To delete the image file with the deleted user
+        unlink(public_path() . $user->photo->file);
+
+        $user->delete();
+
+       Session::flash('deleted_user','The user has been deleted');
+
+        return redirect('/admin/user');
     }
+
+
+
 
 
 }

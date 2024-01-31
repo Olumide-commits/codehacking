@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use function PHPUnit\Framework\returnValue;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -59,4 +63,32 @@ class User extends Authenticatable
 
         return $this->belongsTo('App\Models\Photo');
     }
+
+
+    // for security check
+    // public function isAdmin(){
+
+    //     if($this->role->name == 'administrator'){
+
+    //         return true;
+    //     }
+
+
+    //     return false;
+
+    // }
+
+
+
+    //has many table connected to it from post table because we are getting each user and displaying on post
+    //connect the post table to the user table using belongs to in the post model
+    public function posts(){
+
+        return $this->hasMany('App\Models\Post');
+
+    }
+
+
+
+
 }

@@ -45,7 +45,7 @@
 
         {{ csrf_field() }}
         <br>
-        {!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Update', ['class'=>'btn btn-primary col-sm-3']) !!}
         {{-- <input type="submit" name="submit"> --}}
 
 
@@ -56,7 +56,26 @@
 
     {!! Form::close() !!}
 
+
+{!! Form::open(['method'=>'DELETE', 'action'=>['App\Http\Controllers\AdminUsersController@destroy', $user->id]]) !!}
+
+
+{{-- <input type="text" name="title" placeholder="Enter title"> --}}
+
+{!! Form::submit('delete user', ['class'=>'btn btn-danger col-sm-3']) !!}
+{{-- <input type="submit" name="submit"> --}}
+
+
+
+
+
+
+
+{!! Form::close() !!}
+
 </div>
+
+
 @stop
 
 
